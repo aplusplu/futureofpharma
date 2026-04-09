@@ -1,0 +1,256 @@
+/* ===========================
+   Global Styles
+   =========================== */
+:root{
+  --bg:#0b0f16;
+  --bg-alt:#0e141d;
+  --text:#e8eef9;
+  --muted:#b5c1d6;
+  --brand:#7cffc7;
+  --brand-2:#8b5cf6;
+  --card:#121a25;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#080c12 0%, #0b111a 30%, #0b0f16 100%);
+  line-height:1.55;
+}
+img{max-width:100%;display:block}
+.wrap{max-width:1100px;margin:auto;padding:0 16px}
+
+/* ===========================
+   Header / Navbar + Burger
+   =========================== */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; gap:14px;
+  padding:10px 16px;
+  background:rgba(10,14,20,.55);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  backdrop-filter:saturate(140%) blur(10px);
+}
+
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text)}
+.brand img{height:66px; width:auto; filter:drop-shadow(0 4px 12px rgba(124,255,199,.3))}
+.brand span{font-weight:700; letter-spacing:.4px}
+.brand.mini img{height:28px}
+
+.site-nav{margin-left:auto; display:flex; gap:14px; align-items:center}
+.site-nav a{
+  color:var(--muted); text-decoration:none; padding:10px 12px; border-radius:12px;
+  transition:transform .2s ease, background .2s ease, color .2s ease;
+}
+.site-nav a:hover{background:rgba(255,255,255,.06); color:var(--text); transform:translateY(-1px)}
+.site-nav .cta{
+  background:linear-gradient(90deg,var(--brand-2),var(--brand));
+  color:#081016; font-weight:700;
+}
+.site-nav .cta.alt{
+  background:rgba(255,255,255,.06); color:var(--text);
+  border:1px solid rgba(255,255,255,.12)
+}
+
+/* Burger (checkbox) */
+#nav-toggle{display:none}
+.burger{
+  display:none; width:40px; height:40px;
+  align-items:center; justify-content:center; cursor:pointer
+}
+.burger span{
+  display:block; width:22px; height:2px; background:var(--text);
+  margin:3px 0; transition:.25s
+}
+
+@media (max-width:860px){
+  .burger{display:flex}
+  .site-nav{
+    position:absolute; inset:60px 16px auto 16px;
+    background:rgba(10,14,20,.98);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:10px;
+    display:none; flex-direction:column; box-shadow:var(--shadow)
+  }
+  #nav-toggle:checked ~ .site-nav{display:flex}
+
+  /* burger -> X animation */
+  #nav-toggle:checked + .burger span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+  #nav-toggle:checked + .burger span:nth-child(2){opacity:0}
+  #nav-toggle:checked + .burger span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+}
+
+/* ===========================
+   Hero Slider backgrounds
+   =========================== */
+.hero{position:relative; min-height:72vh; display:grid; place-items:center; overflow:hidden}
+.slides,.slide{position:absolute; inset:0}
+.slides{isolation:isolate}
+.slide{
+  background-size:cover; background-position:center;
+  opacity:0; animation:fade 18s infinite;
+  transform:scale(1.04);
+}
+
+/* CSS file is in assets/css/, so paths go up one level */
+.slide.s1{background-image:url("../img/hero/ai.jpg"); animation-delay:0s}
+.slide.s2{background-image:url("../img/hero/ethic.jpg"); animation-delay:6s}
+.slide.s3{background-image:url("../img/hero/future.jpg"); animation-delay:12s}
+
+@keyframes fade{
+  0%{opacity:0}
+  5%{opacity:1}
+  30%{opacity:1}
+  35%{opacity:0}
+  100%{opacity:0}
+}
+
+/* Overlay & text */
+.hero::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(80% 120% at 50% 80%, rgba(0,0,0,.0) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.75) 100%);
+  z-index:0;
+}
+.hero-inner{
+  position:relative; z-index:1; text-align:center; padding:40px 16px; max-width:900px;
+}
+.hero h1{
+  margin:0 0 12px; font-size:clamp(28px,6vw,54px); line-height:1.1;
+  text-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+.lede{color:var(--muted); font-size:clamp(16px,2.6vw,20px); margin:0 0 18px}
+.btn{
+  display:inline-block; padding:12px 18px; border-radius:14px; text-decoration:none;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  color:#081016; font-weight:800;
+  box-shadow:0 10px 30px rgba(139,92,246,.35);
+}
+.btn.ghost{
+  background:transparent; color:var(--text);
+  border:1px solid rgba(255,255,255,.16); box-shadow:none;
+}
+.btn.small{padding:10px 14px; font-weight:700}
+
+/* ===========================
+   Sect / Content
+   =========================== */
+.section{padding:64px 0}
+.section.alt{background:var(--bg-alt)}
+.grid{display:grid; gap:24px; grid-template-columns:1fr; align-items:center}
+@media (min-width:860px){ .grid{grid-template-columns:1.1fr .9fr} }
+
+.card{
+  background:linear-gradient(180deg,#0e1621,#09111a);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)
+}
+.card img{aspect-ratio:16/10; object-fit:cover}
+.card figcaption{padding:10px 14px; color:var(--muted); font-size:.95rem}
+
+h2{margin:0 0 10px; font-size:clamp(22px,4vw,32px)}
+p{margin:0 0 12px}
+
+/* Ticks */
+.ticks{list-style:none; padding:0; margin:12px 0 0}
+.ticks li{padding-left:28px; position:relative; margin:8px 0; color:#d8e4f4}
+.ticks li::before{
+  content:""; position:absolute; left:0; top:.45em; width:18px; height:18px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, var(--brand) 0%, #69ffa9 40%, rgba(124,255,199,.0) 70%);
+  box-shadow:0 0 30px rgba(124,255,199,.25);
+}
+
+/* Badges */
+.badges{list-style:none; display:flex; gap:16px; padding:0; margin:22px 0 0; align-items:center; flex-wrap:wrap}
+.badges img{height:75px; width:auto; filter:grayscale(10%) brightness(1.1)}
+
+/* Pills */
+.pill-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+.pill{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px; padding:8px 12px; background:rgba(255,255,255,.03); color:var(--muted)
+}
+
+/* ===========================
+   PDF
+   =========================== */
+.pdf-cta .lede{color:var(--muted); margin-bottom:14px}
+.pdf-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+.fineprint{font-size:.9rem; color:#9fb0c9; margin-top:10px}
+
+/* ===========================
+   Contact
+   =========================== */
+.contact .contact-form{
+  display:grid; gap:12px; grid-template-columns:1fr; max-width:720px;
+}
+.contact label{display:grid; gap:6px; color:#cbd6ea}
+.contact input,.contact textarea{
+  padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.1);
+  background:#0c131d; color:var(--text); outline:none;
+}
+.contact input:focus,.contact textarea:focus{border-color:var(--brand)}
+
+/* ===========================
+   Footer extins
+   =========================== */
+.site-footer{background:#0a0f16; color:#cbd6ea; border-top:1px solid rgba(255,255,255,.08)}
+.footer-grid{
+  display:grid; gap:22px; padding:26px 16px; max-width:1100px; margin:auto;
+  grid-template-columns:1fr;
+}
+.footer-grid .col h3{margin:0 0 8px}
+.footer-grid .col .muted{color:#9fb0c9}
+.footer-links{list-style:none; padding:0; margin:0; display:grid; gap:6px}
+.footer-links a{color:#cbd6ea; text-decoration:none}
+.footer-links a:hover{text-decoration:underline}
+.legal{
+  border-top:1px solid rgba(255,255,255,.06);
+  text-align:center; padding:12px 16px; color:#9fb0c9
+}
+
+@media (min-width:860px){
+  .footer-grid{grid-template-columns:1.2fr 1fr 1fr}
+}
+
+/* Neon glow badges */
+.badges img{
+  height:65px; width:auto;
+  filter:grayscale(10%) brightness(1.1);
+  border-radius:8px;
+  box-shadow:0 0 0 rgba(255,140,0,0); /* fallback */
+  transition:box-shadow .3s ease, filter .3s ease;
+}
+
+.badges img.neon{
+  box-shadow:
+    0 0 6px rgba(255,140,0,0.8),
+    0 0 12px rgba(255,140,0,0.7),
+    0 0 22px rgba(255,90,0,0.9),
+    0 0 40px rgba(255,70,0,1);
+  filter:brightness(1.2);
+}
+/* Neon glow + pulse animation */
+.badges img.neon{
+  border-radius:8px;
+  filter:brightness(1.2);
+  animation:pulse-glow 2.5s infinite alternate;
+}
+
+@keyframes pulse-glow{
+  0%{
+    box-shadow:
+      0 0 6px rgba(255,140,0,0.6),
+      0 0 12px rgba(255,90,0,0.5),
+      0 0 20px rgba(255,70,0,0.6);
+  }
+  100%{
+    box-shadow:
+      0 0 12px rgba(255,160,40,0.9),
+      0 0 24px rgba(255,120,20,0.8),
+      0 0 45px rgba(255,80,0,1);
+  }
+}

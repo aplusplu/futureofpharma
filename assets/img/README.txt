@@ -1,0 +1,1 @@
+Put your images here. Optimér til web (72ppi) og komprimer dem.
